@@ -1,0 +1,40 @@
+environmental variable
+---------------------------
+.env - store environmental variable
+1.Variable that contain application configurations needs in the time of running
+2.module - process -providing environmental variables
+3.It converts static working of app into dynamic
+
+
+19/07/2023 wednesday
+create models
+import mongoose to models
+create model for collection
+
+In mongodb  datas store in documents
+command vech db operations cheyyan mongoshell use cheyyunnu
+db operations by server
+db operations manually in db atlas
+by using mongosh
+
+
+methods for mongodb operations from node
+----------------------------------------------------
+1.create - c- new modelname({key:value})
+                                new users({
+                                     acno:Number,
+                                    uname:String,
+                                    pws:String,
+                                    balance:Number,
+                                    transaction:[]
+                                })
+                                -save()
+
+2.read - r -find() -> to access all datas from collection
+    to read single data from collection use findone() method
+    - findone({data}) eg: findone({accno:1000})
+    - findone() use cheyyumbo argument aayii oru object kudii kodukkanam.
+    - to find which data or whose data pass a parameter as object in findone() method.
+3.update -u- findone({})
+            - in update also findone() method use cheyyamm
+4.delete-d - deleteone({})
