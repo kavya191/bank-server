@@ -11,6 +11,12 @@ const  router=new express.Router()
 router.post('/bankuser/userRegister',logic.register)
 //login
 router.post('/bankuser/userLogin',logic.login)
+//userProfile
+router.get('/bankuser/userProfile/:accNo',logic.getprofile)
+//userBalance
+router.get('/bankuser/userBalance/:accNo',logic.getBalance)
+//moneytransfer
+router.post('/bankuser/moneyTransfer',logic.getMoney)
 
 //export router
 module.exports=router
