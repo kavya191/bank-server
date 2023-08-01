@@ -18,5 +18,9 @@ router.get('/bankuser/userBalance/:accNo',logic.getBalance)
 //moneytransfer
 router.post('/bankuser/moneyTransfer',logic.getMoney)
 
+//transaction history
+router.get('/bankuser/userHistory/:accNo',logic.history)
+//delete account
+router.delete('/bankuser/userDelete/:accNo',logic.deleteAccount)
 //export router
 module.exports=router

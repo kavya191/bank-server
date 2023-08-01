@@ -86,36 +86,36 @@ const getBalance = (req, res) => {
 //logic for money Transfer
 const getMoney = (req, res) => {
     //acccess all data from body request
-    const { fromAccno,toAccno,pwd,amount,date } = req.body
+    const { fromAccno, toAccno, pwd, amount, date } = req.body
     //convert amount from string to number.
     //number comming from frontend is string type
     let amnt = parseInt(amount)
     //check from user in db
-    users.findOne({ accNo: fromAccno,pwd }).then(fromUser => {
+    users.findOne({ accNo: fromAccno, pwd }).then(fromUser => {
         //check from user in db
         if (fromUser) {
             users.findOne({ accNo: toAccno }).then(toUser => {
                 //check touser in db
                 if (toUser) {
                     //check from user balance
-                    if(amnt<=fromUser.balance){
+                    if (amnt <= fromUser.balance) {
                         //decrease fromuser balance
-                        fromUser.balance-=amnt
+                        fromUser.balance -= amnt
                         //transaction details of fromuser
-                        fromUser.transactions.push({type:"DEBIT",amount:amnt,date,user:toUser.uName})
+                        fromUser.transactions.push({ type: "DEBIT", amount: amnt, date, user: toUser.uName })
                         //save it in mongodb atlas
                         fromUser.save()
 
                         //increase touser balance
-                        toUser.balance+=amnt
+                        toUser.balance += amnt
                         //transaction details of touser
-                        toUser.transactions.push({type:"CREDIT",amount:amnt,date,user:fromUser.uName})
+                        toUser.transactions.push({ type: "CREDIT", amount: amnt, date, user: fromUser.uName })
                         //save t in mongodb atlas
                         toUser.save()
 
-                        res.status(200).json({message:"transaction success"})
-                    }else{
-                        res.status(401).json({message:"insufficent balance"})
+                        res.status(200).json({ message: "transaction success" })
+                    } else {
+                        res.status(401).json({ message: "insufficent balance" })
                     }
 
 
@@ -130,11 +130,38 @@ const getMoney = (req, res) => {
     })
 
 }
+//logic for transaction history
+const history = (req, res) => {
+    //destructure
+    const { accNo } = req.params
+    users.findOne({ accNo }).then(user => {
+        if (user) {
+            res.status(200).json(user.transactions)
+
+        } else {
+            res.status(401).json("user not exist")
+        }
+    })
+}
+//delete account
+const deleteAccount = (req, res) => {
+    const { accNo } = req.params
+    users.deleteOne({ accNo }).then(user => { //deletecount
+        if (user) {
+            res.status(200).json("Account Deleted successfully")
+        } else {
+            res.status(401).json("user not exist")
+        }
+    }
+    )
+}
 
 module.exports = {
     register,
     login,
     getprofile,
     getBalance,
-    getMoney
+    getMoney,
+    history,
+    deleteAccount
 }
