@@ -1,3 +1,6 @@
+//import jwt
+//for user authentication
+const jwt=require('jsonwebtoken')
 //import models - users
 const users = require("../models/modelcollection")
 //logic for register
@@ -40,8 +43,16 @@ const login = (req, res) => {
     //check accNo  ,pwd present
     users.findOne({ accNo, pwd }).then(user => {
         if (user) {
+            //generate token
+            var token=jwt.sign({accNo},'privatekey123')
+            // user["token"]=token
             //convert js to json type 
-            res.status(200).json(user)
+            res.status(200).json({
+                accNo:user.accNo,
+                uName:user.uName,
+                token
+            })
+            
         } else {
             res.status(401).json("inccorect username or password")
         }
