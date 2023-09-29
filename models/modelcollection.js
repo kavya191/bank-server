@@ -12,4 +12,4 @@ const users=new mongoose.model("users",{
     transactions:[]
 })
 //exoprt users
-module.exports=users
+module.exports={users}
