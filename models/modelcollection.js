@@ -1,6 +1,7 @@
 //import mongoose in  model
 const mongoose=require('mongoose')
 //create model for collection
+///
 //schema - fields and values of collection
 
 //users-model or collection
