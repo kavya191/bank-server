@@ -6,9 +6,6 @@ const logic=require('../controllers/logic')
 //import middleware
 const jwtMiddleware = require('../middlewares/routerMiddleware')
 
-
-
-
 //create an object for router class in express
 const  router=new express.Router()
 

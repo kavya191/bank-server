@@ -7,27 +7,31 @@
 //expect cheyyunna aqgument string aayakond quotesil kodukkanam. keyname package.jsonil indaavummm
 const express = require("express")
 //import .env file
+
 //.env file index.js aayitt configuration nadakkan config() use cheyyunnu
 require('dotenv').config()
+//2.server create cheyyn use cheyyunne function - express()
+const server = express()
+
 // //import cors
 //server  frondend integration
 //cors- cross orgin resource sharing
 const cors = require('cors')
-// const rout = require("./routes/userRouter")
-// //import db connection+
-//stringil path aayitt kodukkuka
-require('./db/dbconnection')
 // //import router
- const router = require('./routes/userRouter')
-//create server using express
-//2.server create cheyyn use cheyyunne function - express()
-const server = express()
+const router = require('./routes/userRouter')
 
 //connect cors with frondend - server  frondend integration
 
 server.use((cors()))
- //to convert all incomming json type data into javascript
+//to convert all incomming json type data into javascript
 server.use(express.json())
+// const rout = require("./routes/userRouter")
+// //import db connection+
+//stringil path aayitt kodukkuka
+require('./db/dbconnection')
+
+//create server using express
+
 
  // tell server to use router
 server.use(router)
